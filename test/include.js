@@ -50,10 +50,10 @@ describe("include - require decorator", function(){
 		});
 
 		it("handle multiple levels od prefixes", function(){
-			newrequire.prefix("root",__dirname+"/..");
-			newrequire.prefix("root:core",__dirname+"/..");
-			expect(newrequire('root:asd')).to.equal(require("../asd"));
-			expect(newrequire('root:core:asd')).to.equal(require("../asd"));
+			newrequire.prefix("root",__dirname+"/data/");
+			newrequire.prefix("root:core",__dirname+"/data");
+			expect(newrequire('root:data')).to.equal(require("./data/data"));
+			expect(newrequire('root:core:data')).to.equal(require("./data/data"));
 		});
 
 		it("throw MODULE_NOT_FOUND when module is not found", function(){
