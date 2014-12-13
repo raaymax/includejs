@@ -29,7 +29,7 @@ describe("include - require decorator", function(){
 		});
 	});
 
-	describe("prefixes extension should", function(){
+	describe("prefixes extension", function(){
 	
 		it("should import modules", function(){
 			newrequire.prefix("testData",__dirname+"/data/");
@@ -73,6 +73,37 @@ describe("include - require decorator", function(){
 		it("should throw MODULE_NOT_FOUND when module is not found", function(){
 			expect(function(){newrequire('root:net');}).to.throw(Error);
 		});
+	});
+
+	describe("path extensions '*'", function(){
+		it("should return empty list if no path found" ,function(){
+			expect(newrequire('./oko/*'))
+				.to.be.instanceOf(Array)
+				.to.be.empty();
+		})
+		it("should return js file in list if *.js" ,function(){
+			expect(newrequire('./data/*.js'))
+				.to.be.instanceOf(Array)
+				.to.include(require("./data/dataJS"));
+		})
+		it("should return js and json file when type not specyfied" ,function(){
+			expect(newrequire('./data/*'))
+				.to.be.instanceOf(Array)
+				.to.include(require("./data/dataJS"))
+				.to.include(require("./data/data"));
+		})
+		it("should find module if folder is unknown" ,function(){
+			expect(newrequire('./*/data.json'))
+				.to.be.instanceOf(Array)
+				.to.be.length(1)
+				.to.include(require("./data/data"));
+		})
+		it("should match only files" ,function(){
+			expect(newrequire('./d*'))
+				.to.be.instanceOf(Array)
+				.to.be.empty();
+		})
+			
 	});
 })
 

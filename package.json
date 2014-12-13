@@ -1,12 +1,14 @@
 {
   "name": "irequire",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Extension for require",
   "main": "lib/include.js",
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "glob": "^4.3.1"
+  },
   "devDependencies": {
     "chai": "^1.10.0"
   },
