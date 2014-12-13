@@ -31,32 +31,46 @@ describe("include - require decorator", function(){
 
 	describe("prefixes extension should", function(){
 	
-		it("import modules", function(){
+		it("should import modules", function(){
 			newrequire.prefix("testData",__dirname+"/data/");
 			expect(newrequire('testData:dataJS')).to.equal(require("./data/dataJS"));
 		});
 
-		it("always load modules relative to prefix", function(){
+		it("can be functions", function(){
+			newrequire.prefix("testData", function(q){
+				if(q.key == "mod1")
+					return __dirname+"/data/dataJS";
+				else if(q.key == "mod2")
+					return __dirname+"/data/data";
+				else
+					throw new Error("Unknown key");
+			});
+			expect(newrequire('testData:mod1')).to.equal(require("./data/dataJS"));
+			expect(newrequire('testData:mod2')).to.equal(require("./data/data"));
+			expect(function(){newrequire('testData:net');}).to.throw(Error);
+		});
+
+		it("should always load modules relative to prefix", function(){
 			newrequire.prefix("testData",__dirname+"/");
 			expect(newrequire('testData:data/dataJS')).to.equal(require("./data/dataJS"));
 			expect(newrequire('testData:./data/dataJS')).to.equal(require("./data/dataJS"));
 			expect(newrequire('testData:/data/dataJS')).to.equal(require("./data/dataJS"));
 		});
 
-		it("import both js and json files", function(){
+		it("should import both js and json files", function(){
 			newrequire.prefix("testData",__dirname+"/data/");
 			expect(newrequire('testData:data')).to.equal(require("./data/data"));
 			expect(newrequire('testData:dataJS')).to.equal(require("./data/dataJS"));
 		});
 
-		it("handle multiple levels od prefixes", function(){
+		it("should handle multiple levels od prefixes", function(){
 			newrequire.prefix("root",__dirname+"/data/");
 			newrequire.prefix("root:core",__dirname+"/data");
 			expect(newrequire('root:data')).to.equal(require("./data/data"));
 			expect(newrequire('root:core:data')).to.equal(require("./data/data"));
 		});
 
-		it("throw MODULE_NOT_FOUND when module is not found", function(){
+		it("should throw MODULE_NOT_FOUND when module is not found", function(){
 			expect(function(){newrequire('root:net');}).to.throw(Error);
 		});
 	});
