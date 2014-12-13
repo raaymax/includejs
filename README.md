@@ -35,8 +35,8 @@ irequire.prefix("ext",function(query){
 		throw new Error("Unknown key");
 });
 
-var mod = irequire("ext:mod1") will return ./module1.js
-var mod2 = irequire("ext:anyelse") will throw error
+var mod = irequire("ext:mod1") // will return ./module1.js
+var mod2 = irequire("ext:anyelse") // will throw error
 ```
 
 Have fun :)
