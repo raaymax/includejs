@@ -1,8 +1,8 @@
 {
   "name": "irequire",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Extension for require",
-  "main": "lib/include.js",
+  "main": "lib/irequire.js",
   "directories": {
     "test": "test"
   },
