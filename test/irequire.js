@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var r = require("../lib/include");
+var r = require("../lib/irequire");
 r.install("newrequire");
 
 describe("include - require decorator", function(){
