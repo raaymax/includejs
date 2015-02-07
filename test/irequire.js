@@ -105,5 +105,17 @@ describe("include - require decorator", function(){
 		})
 			
 	});
+
+	describe("additional info extension", function(){
+		it("should return additional info", function(){
+			expect(newrequire('./data/dataJS').__name).to.equal('dataJS');
+		});
+		it("should return nameOfFile - always", function(){
+			newrequire.prefix("testData", function(q){
+				return __dirname+"/data/dataJS";
+			});
+			expect(newrequire('testData:mod1').__name).to.equal("dataJS");
+		});
+	});
 })
 
