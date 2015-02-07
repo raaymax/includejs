@@ -86,6 +86,16 @@ describe("include - require decorator", function(){
 				.to.be.instanceOf(Array)
 				.to.include(require("./data/dataJS"));
 		})
+		it("should return should ignore dirs by default" ,function(){
+			expect(newrequire('./data/*'))
+				.to.be.instanceOf(Array)
+				.to.not.include(require("./data/test"));
+		})
+		it("should be able to pass glob options" ,function(){
+			expect(newrequire('./data/*', {nodir:false}))
+				.to.be.instanceOf(Array)
+				.to.include(require("./data/test"));
+		})
 		it("should return js and json file when type not specyfied" ,function(){
 			expect(newrequire('./data/*'))
 				.to.be.instanceOf(Array)
