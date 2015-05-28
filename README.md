@@ -15,7 +15,7 @@ npm install --save irequire
 **in main file - app.js for example**
 ```js
 var path = require('path');
-irequire = require('irequire')()
+global.irequire = require('irequire')(); 
 
 var net = irequire("net"); // irequire is fully compatible with require
 
@@ -23,9 +23,9 @@ var net = irequire("net"); // irequire is fully compatible with require
 irequire.prefix("controllers",path.join(__dirname,"app/controllers/"));
 irequire.prefix("config",path.join(__dirname,"config"));
 
-
-var someconfig = irequire("config:some") // equiwalent to require(__dirname+"/config/some");
-var home = irequire("controllers:home") // equiwalent to require(__dirname+"/app/controllers/home");
+//loading modules 
+var someconfig = irequire("config:some"); 
+var home = irequire("controllers:home");
 
 //as prefix you can use function
 irequire.prefix("ext",function(query){
@@ -35,7 +35,7 @@ irequire.prefix("ext",function(query){
 		throw new Error("Unknown key");
 });
 
-var mod = irequire("ext:mod1") // will return ./module1.js
+var mod = irequire("ext:mod1") // will load ./module1.js
 var mod2 = irequire("ext:anyelse") // will throw error
 ```
 
