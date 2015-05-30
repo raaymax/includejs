@@ -132,7 +132,7 @@ describe("include - require decorator", function(){
 		it("should store data and get it", function(){
 			var ob = {asd:123};
 			newrequire.store('somedata',ob);
-			expect(newrequire('somedata')).to.equal(ob);
+			expect(newrequire('store:somedata')).to.equal(ob);
 		});
 	})
 });
