@@ -127,5 +127,13 @@ describe("include - require decorator", function(){
 			expect(newrequire('testData:mod1').__name).to.equal("dataJS");
 		});
 	});
-})
+
+	describe("store", function(){
+		it("should store data and get it", function(){
+			var ob = {asd:123};
+			newrequire.store('somedata',ob);
+			expect(newrequire('somedata')).to.equal(ob);
+		});
+	})
+});
 
